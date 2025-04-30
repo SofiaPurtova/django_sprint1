@@ -48,7 +48,8 @@ posts = [
 
 def index(request):
     # Передаём все посты в шаблон
-    return render(request, 'blog/index.html', {'posts': posts})
+    sorted_posts = sorted(posts, key=lambda x: x['id'], reverse=True)
+    return render(request, 'blog/index.html', {'posts': sorted_posts})
 
 
 def post_detail(request, id):
@@ -62,5 +63,5 @@ def post_detail(request, id):
 
 
 def category_posts(request, category_slug):
-    return render(request, 'blog/category.html', 
+    return render(request, 'blog/category.html',
                   {'category_slug': category_slug})
